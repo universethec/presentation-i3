@@ -55,8 +55,7 @@ The claude-ai version bundles all the skill instructions, component patterns, an
 
 | Preset | Description |
 |--------|-------------|
-| `impact3` | Dark purple gradient, Impact3 branding, animated wave canvas, conic-gradient stroke borders |
-| `dark-sky` | Alternative dark theme |
+| `impact3` | Dark purple gradient, Impact3 branding, animated wave canvas, conic-gradient stroke borders (default) |
 
 ### impact3 preset rules
 
@@ -76,8 +75,7 @@ presentation-i3/
   claude-ai/
     presentation-i3.md  # Single-file version for Claude.ai Projects
   presets/
-    impact3.html        # Full HTML shell template
-    dark-sky.html       # Alternative preset
+    impact3.html        # Full HTML shell template (default and only preset)
   references/
     components.md       # HTML patterns for all slide components
     screenshot-patterns.md

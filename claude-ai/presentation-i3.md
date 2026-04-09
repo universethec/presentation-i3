@@ -20,7 +20,7 @@ Follow these phases in order. Do not skip phases. Do not start building before t
 
 1. Ask the user: **"What's the audience?"** (stakeholders, team, investors, etc.)
 2. Ask: **"What's the single takeaway?"** (one sentence they should remember)
-3. This skill includes one preset: **dark-sky**. It will be used automatically.
+3. This skill includes one preset: **impact3**. It will be used automatically.
 4. Ask for **data sources** — paste or upload markdown files, documents, or descriptions of data to include.
 5. Ask for **screenshots** — the user can upload images directly in the conversation, or note that no screenshots are needed.
 6. Review all provided data sources. Inventory all uploaded screenshots (list filenames and note what each appears to show).
@@ -63,7 +63,7 @@ Slide N: "Title"
 
 **Goal:** Generate the complete HTML presentation as an artifact.
 
-1. Use the **dark-sky** preset template from the Preset section below.
+1. Use the **impact3** preset template from the Preset section below.
 2. Use the **Component Patterns** reference below for HTML patterns.
 3. For each slide in the approved storyboard:
    a. Look up the component HTML pattern in the Component Patterns reference.
@@ -144,7 +144,7 @@ Slide N: "Title"
 - Every `<section>` MUST include a `<!-- SLIDE N: Title -->` comment marker.
 - All images MUST be base64-encoded inline when possible. No external URLs ever. When base64 is not available, use clearly labeled placeholders.
 - The preset below is the ONLY source for HTML structure, CSS, and JS. Never generate these from scratch.
-- If the user does not specify a preset, use **dark-sky** (the only preset included in this file).
+- If the user does not specify a preset, use **impact3** (the only preset included in this file).
 - Maximum recommended slides: 15. Warn if storyboard exceeds this.
 - The `.component` wrapper with `.component-inner` is used for all data components. The `hero` component does NOT use the wrapper.
 - Output the presentation as a single HTML artifact.
@@ -933,7 +933,7 @@ Plain language. Describe the problem like you're telling a colleague.
 
 ---
 
-## Preset: dark-sky
+## Preset: impact3
 
 The following is the complete HTML preset template. When building a presentation, copy this template and replace `{{SLIDES}}`, `{{TITLE}}`, `{{SLIDE_COUNT}}`, and `{{DATE}}` with the generated content.
 
@@ -947,7 +947,7 @@ The following is the complete HTML preset template. When building a presentation
 <title>{{TITLE}}</title>
 <style>
   :root {
-    --sky-black: #050505;
+    --i3-dark: #12002E;
     --gray-100: #1C1C22;
     --gray-80: #2B2B36;
     --gray-50: #6F6E80;
@@ -965,50 +965,54 @@ The following is the complete HTML preset template. When building a presentation
     --yellow-5: #FFC044;
     --magenta-6: #EB5EDF;
     --blue-6: #0075FF;
+    --i3-accent: #7821F7;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { overflow: hidden; height: 100%; }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro', sans-serif;
-    background: var(--sky-black);
+    background: linear-gradient(to top left, #7821F7, #12002E);
     color: var(--white);
     line-height: 1.6;
     overflow: hidden;
     height: 100%;
   }
 
+  h1, h2 { font-family: Impact, 'Arial Black', sans-serif; text-transform: uppercase; }
+  h1 strong { font-weight: 600; color: #FFFFFF; -webkit-text-fill-color: #FFFFFF; background: none; -webkit-background-clip: unset; background-clip: unset; }
+
   /* --- NAV --- */
   .nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 16px 40px;
     display: flex; justify-content: space-between; align-items: center;
-    background: rgba(5,5,5,0.85);
+    background: rgba(18,0,46,0.85);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(106,108,251,0.1);
+    border-bottom: 1px solid rgba(120,33,247,0.15);
   }
   .nav-logo { font-weight: 600; font-size: 14px; letter-spacing: -0.02em; color: var(--gray-40); }
-  .nav-logo span { color: var(--purple-5); }
-  .nav-progress { height: 2px; background: linear-gradient(90deg, var(--sky-purple), var(--purple-5)); position: fixed; top: 0; left: 0; z-index: 101; transition: width 0.3s ease; }
+  .nav-logo span { color: #7821F7; }
+  .nav-progress { height: 2px; background: linear-gradient(90deg, #7821F7, #B68EFF); position: fixed; top: 0; left: 0; z-index: 101; transition: width 0.3s ease; }
   .nav-dots { display: flex; gap: 8px; align-items: center; }
   .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gray-50); cursor: pointer; transition: all 0.3s ease; }
-  .nav-dot.active { background: var(--purple-5); width: 24px; border-radius: 3px; }
+  .nav-dot.active { background: #7821F7; width: 24px; border-radius: 3px; }
   .nav-dot:hover { background: var(--gray-40); }
   .slide-counter { font-size: 12px; color: var(--gray-50); font-variant-numeric: tabular-nums; font-weight: 500; }
-  .slide-counter .current { color: var(--purple-5); font-weight: 700; }
+  .slide-counter .current { color: #7821F7; font-weight: 700; }
   .slide-arrows { display: flex; gap: 4px; align-items: center; }
   .slide-arrows button {
-    width: 32px; height: 32px; border-radius: 8px; border: 1px solid rgba(106,108,251,0.15);
+    width: 32px; height: 32px; border-radius: 8px; border: 1px solid rgba(120,33,247,0.15);
     background: rgba(28,28,34,0.6); color: var(--gray-40); cursor: pointer; display: flex;
     align-items: center; justify-content: center; transition: all 0.2s; font-size: 14px;
   }
-  .slide-arrows button:hover { border-color: rgba(106,108,251,0.4); color: var(--white); background: rgba(28,28,34,0.9); }
+  .slide-arrows button:hover { border-color: rgba(120,33,247,0.4); color: var(--white); background: rgba(28,28,34,0.9); }
   .slide-arrows button:disabled { opacity: 0.3; cursor: default; }
   .slide-hint {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 100;
     font-size: 11px; color: var(--gray-50); letter-spacing: 0.08em;
     background: rgba(28,28,34,0.8); padding: 8px 20px; border-radius: 100px;
-    border: 1px solid rgba(106,108,251,0.1); backdrop-filter: blur(12px);
+    border: 1px solid rgba(120,33,247,0.1); backdrop-filter: blur(12px);
     transition: opacity 0.5s; pointer-events: none;
   }
 
@@ -1026,6 +1030,7 @@ The following is the complete HTML preset template. When building a presentation
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    z-index: 1;
   }
   section::-webkit-scrollbar { display: none; }
   section.active {
@@ -1050,39 +1055,42 @@ The following is the complete HTML preset template. When building a presentation
     padding-bottom: 24px;
   }
   .section-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+  section img { object-fit: contain; border-radius: 16px; max-height: 80vh; }
+  [style*="text-align:center"] img { max-height: 60vh; }
+  section .section-inner > * { max-height: calc(100vh - 120px); overflow: hidden; }
 
   /* --- TYPOGRAPHY --- */
-  .kicker { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--purple-5); margin-bottom: 6px; }
-  h1 { font-size: clamp(48px, 7vw, 96px); font-weight: 300; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 32px; }
-  h1 strong { font-weight: 600; background: linear-gradient(135deg, var(--purple-5), var(--cyan-4)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  h2 { font-size: clamp(32px, 4vw, 52px); font-weight: 300; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 12px; }
+  .kicker { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #7821F7; margin-bottom: 6px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro', sans-serif; }
+  h1 { font-size: clamp(48px, 7vw, 96px); font-weight: 300; letter-spacing: 0em; line-height: 0.95; margin-bottom: 32px; color: #FFFFFF; }
+  h2 { font-size: clamp(32px, 4vw, 52px); font-weight: 300; letter-spacing: 0em; line-height: 1.05; margin-bottom: 12px; color: #FFFFFF; }
   h2 strong { font-weight: 600; }
-  h3 { font-size: 18px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 8px; }
-  .subtitle { font-size: 15px; color: var(--gray-40); max-width: 600px; line-height: 1.7; font-weight: 400; }
-  .big-number { font-size: clamp(48px, 8vw, 80px); font-weight: 700; letter-spacing: -0.05em; line-height: 1; background: linear-gradient(135deg, var(--sky-purple), var(--purple-5)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  h3 { font-size: 18px; font-weight: 500; letter-spacing: 0em; margin-bottom: 8px; }
+  .subtitle { font-size: 17px; color: rgba(255,255,255,0.7); max-width: 600px; line-height: 1.7; font-weight: 400; margin-bottom: 20px; }
+  .big-number { font-size: clamp(48px, 8vw, 80px); font-weight: 700; letter-spacing: -0.05em; line-height: 1; background: linear-gradient(135deg, #7821F7, #B68EFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .big-number.red { background: linear-gradient(135deg, var(--red-6), var(--red-2)); -webkit-background-clip: text; background-clip: text; }
   .big-number.green { background: linear-gradient(135deg, var(--emerald-3), var(--cyan-4)); -webkit-background-clip: text; background-clip: text; }
   .big-number.yellow { background: linear-gradient(135deg, var(--yellow-5), var(--red-2)); -webkit-background-clip: text; background-clip: text; }
-  .big-label { font-size: 14px; color: var(--gray-40); font-weight: 500; margin-top: 8px; letter-spacing: 0.02em; }
+  .big-label { font-size: 15px; color: rgba(255,255,255,0.7); font-weight: 500; margin-top: 8px; letter-spacing: 0.02em; }
 
   /* --- HERO --- */
-  .hero { display: flex; align-items: center; position: absolute; top:0;left:0;right:0;bottom:0; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: -30%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(67,49,233,0.15) 0%, transparent 70%); pointer-events: none; }
-  .hero::after { content: ''; position: absolute; bottom: -20%; left: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,221,251,0.08) 0%, transparent 70%); pointer-events: none; }
+  .hero { display: flex; align-items: center; position: absolute; top:0;left:0;right:0;bottom:0; overflow: hidden; z-index: 1; }
+  .hero::before { content: ''; position: absolute; top: -30%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(120,33,247,0.2) 0%, transparent 70%); pointer-events: none; }
+  .hero::after { content: ''; position: absolute; bottom: -20%; left: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(182,142,255,0.1) 0%, transparent 70%); pointer-events: none; }
+  .hero-logo { position: relative; z-index: 1; }
   .hero-meta { display: flex; gap: 32px; margin-top: 48px; flex-wrap: wrap; }
-  .hero-meta-item { padding: 16px 24px; background: rgba(28,28,34,0.6); border: 1px solid rgba(106,108,251,0.15); border-radius: 12px; }
+  .hero-meta-item { padding: 16px 24px; background: rgba(18,0,46,0.6); border: 1px solid rgba(120,33,247,0.15); border-radius: 28px; }
   .hero-meta-item .label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-50); margin-bottom: 4px; }
   .hero-meta-item .value { font-size: 15px; font-weight: 500; color: var(--gray-20); }
 
   /* --- GRIDS --- */
-  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 32px; }
-  .stat-card { background: var(--gray-100); border: 1px solid rgba(106,108,251,0.1); border-radius: 16px; padding: 20px 24px; transition: transform 0.3s ease, border-color 0.3s ease; }
-  .stat-card:hover { transform: translateY(-2px); border-color: rgba(106,108,251,0.3); }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 48px; }
+  .stat-card { background: rgba(18,0,46,0.5); border: 1px solid rgba(120,33,247,0.1); border-radius: 16px; padding: 20px 24px; transition: transform 0.3s ease, border-color 0.3s ease; }
+  .stat-card:hover { transform: translateY(-2px); border-color: rgba(120,33,247,0.3); }
   .stat-card .stat-value { font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 8px; }
-  .stat-card .stat-label { font-size: 13px; color: var(--gray-40); font-weight: 500; }
-  .stat-card .stat-sub { font-size: 12px; color: var(--gray-50); margin-top: 12px; line-height: 1.5; }
-  .stat-card.highlight { border-color: rgba(255,109,109,0.3); background: linear-gradient(135deg, var(--gray-100), rgba(255,109,109,0.05)); }
-  .stat-card.success { border-color: rgba(170,242,225,0.3); background: linear-gradient(135deg, var(--gray-100), rgba(170,242,225,0.05)); }
+  .stat-card .stat-label { font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 500; }
+  .stat-card .stat-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 12px; line-height: 1.6; }
+  .stat-card.highlight { border-color: rgba(255,109,109,0.3); background: linear-gradient(135deg, rgba(18,0,46,0.5), rgba(255,109,109,0.05)); }
+  .stat-card.success { border-color: rgba(170,242,225,0.3); background: linear-gradient(135deg, rgba(18,0,46,0.5), rgba(170,242,225,0.05)); }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
   .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
 
@@ -1092,52 +1100,52 @@ The following is the complete HTML preset template. When building a presentation
   .funnel-bar-wrap { flex: 1; }
   .funnel-bar { height: 40px; border-radius: 8px; display: flex; align-items: center; padding: 0 14px; font-weight: 600; font-size: 13px; position: relative; overflow: visible; white-space: nowrap; }
   .funnel-bar::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, transparent 60%, rgba(255,255,255,0.05)); }
-  .funnel-label { width: 160px; font-size: 13px; color: var(--gray-40); text-align: right; flex-shrink: 0; }
-  .funnel-pct { width: 80px; font-size: 13px; color: var(--gray-50); text-align: left; flex-shrink: 0; }
-  .funnel-time { width: 80px; font-size: 11px; color: var(--gray-50); text-align: left; flex-shrink: 0; font-style: italic; }
+  .funnel-label { width: 160px; font-size: 14px; color: rgba(255,255,255,0.7); text-align: right; flex-shrink: 0; }
+  .funnel-pct { width: 80px; font-size: 14px; color: rgba(255,255,255,0.6); text-align: left; flex-shrink: 0; }
+  .funnel-time { width: 80px; font-size: 12px; color: rgba(255,255,255,0.5); text-align: left; flex-shrink: 0; font-style: italic; }
   .funnel-drop { display: flex; align-items: center; gap: 24px; padding: 4px 0 4px 184px; }
   .funnel-drop-line { width: 2px; height: 24px; background: rgba(255,109,109,0.3); margin-left: 20px; }
-  .funnel-drop-text { font-size: 12px; color: var(--red-6); font-weight: 500; }
+  .funnel-drop-text { font-size: 13px; color: var(--red-6); font-weight: 500; }
 
   /* --- BAR CHART --- */
   .bar-chart { display: flex; flex-direction: column; gap: 8px; margin-top: 32px; }
   .bar-row { display: flex; align-items: center; gap: 16px; }
   .bar-label { width: 120px; font-size: 13px; color: var(--gray-40); text-align: right; flex-shrink: 0; }
-  .bar-track { flex: 1; height: 26px; background: rgba(28,28,34,0.6); border-radius: 6px; overflow: hidden; }
+  .bar-track { flex: 1; height: 26px; background: rgba(18,0,46,0.6); border-radius: 6px; overflow: hidden; }
   .bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; font-size: 12px; font-weight: 600; white-space: nowrap; }
   .bar-value { width: 80px; font-size: 12px; color: var(--gray-50); flex-shrink: 0; }
 
   /* --- TABLE --- */
   .data-table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 13px; }
-  .data-table th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-50); border-bottom: 1px solid rgba(106,108,251,0.15); }
+  .data-table th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-50); border-bottom: 1px solid rgba(120,33,247,0.15); }
   .data-table th.r { text-align: right; }
-  .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(28,28,34,0.8); color: var(--gray-20); }
+  .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(18,0,46,0.8); color: var(--gray-20); }
   .data-table td.r { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
   .data-table td.em { color: var(--white); font-weight: 600; }
   .data-table td.red { color: var(--red-6); font-weight: 600; }
   .data-table td.green { color: var(--emerald-3); }
-  .data-table td.purple { color: var(--purple-5); font-weight: 600; }
+  .data-table td.purple { color: #7821F7; font-weight: 600; }
   .data-table td.dim { color: var(--gray-50); }
-  .data-table tr:hover td { background: rgba(28,28,34,0.4); }
-  .table-wrap { background: var(--gray-100); border: 1px solid rgba(106,108,251,0.1); border-radius: 16px; padding: 20px; overflow: hidden; }
+  .data-table tr:hover td { background: rgba(18,0,46,0.4); }
+  .table-wrap { background: rgba(18,0,46,0.5); border: 1px solid rgba(120,33,247,0.1); border-radius: 16px; padding: 20px; overflow: hidden; }
   .table-wrap .tw-title { font-size: 12px; font-weight: 600; color: var(--gray-40); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
 
   /* --- COMPARISON --- */
   .comparison { display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center; margin-top: 24px; }
-  .comparison-card { background: var(--gray-100); border-radius: 20px; padding: 28px; border: 1px solid rgba(106,108,251,0.1); }
+  .comparison-card { background: rgba(18,0,46,0.5); border-radius: 20px; padding: 28px; border: 1px solid rgba(120,33,247,0.1); }
   .comparison-vs { font-size: 14px; font-weight: 700; color: var(--gray-50); letter-spacing: 0.1em; }
 
   /* --- CALLOUT --- */
-  .callout { background: linear-gradient(135deg, rgba(67,49,233,0.1), rgba(0,221,251,0.05)); border: 1px solid rgba(106,108,251,0.2); border-radius: 16px; padding: 20px 28px; margin-top: 32px; font-size: 14px; line-height: 1.7; color: var(--gray-20); }
+  .callout { background: linear-gradient(135deg, rgba(120,33,247,0.1), rgba(182,142,255,0.05)); border: 1px solid rgba(120,33,247,0.2); border-radius: 16px; padding: 20px 28px; margin-top: 32px; font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.75); }
   .callout strong { color: var(--white); }
   .callout.warn { background: linear-gradient(135deg, rgba(255,109,109,0.08), rgba(255,192,68,0.04)); border-color: rgba(255,109,109,0.2); }
   .callout.good { background: linear-gradient(135deg, rgba(170,242,225,0.08), rgba(0,221,251,0.04)); border-color: rgba(170,242,225,0.2); }
 
   /* --- DEAD CLICK LIST --- */
   .dead-click-list { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
-  .dead-click-item { display: flex; align-items: center; gap: 16px; padding: 8px 12px; border-radius: 10px; background: rgba(28,28,34,0.5); border: 1px solid rgba(255,109,109,0.05); }
+  .dead-click-item { display: flex; align-items: center; gap: 16px; padding: 8px 12px; border-radius: 10px; background: rgba(18,0,46,0.5); border: 1px solid rgba(255,109,109,0.05); }
   .dc-element { flex: 1; font-size: 13px; color: var(--gray-20); font-weight: 500; }
-  .dc-element code { background: rgba(106,108,251,0.1); padding: 2px 8px; border-radius: 4px; font-size: 12px; font-family: 'SF Mono', monospace; color: var(--purple-3); }
+  .dc-element code { background: rgba(120,33,247,0.1); padding: 2px 8px; border-radius: 4px; font-size: 12px; font-family: 'SF Mono', monospace; color: var(--purple-3); }
   .dc-count { font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 600; color: var(--red-6); width: 60px; text-align: right; }
   .dc-users { font-variant-numeric: tabular-nums; font-size: 11px; color: var(--gray-50); width: 50px; text-align: right; }
   .dc-bar { width: 120px; height: 6px; background: rgba(255,109,109,0.1); border-radius: 3px; overflow: hidden; }
@@ -1145,33 +1153,33 @@ The following is the complete HTML preset template. When building a presentation
 
   /* --- PRIORITY LIST --- */
   .priority-list { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; }
-  .priority-item { display: flex; gap: 20px; align-items: flex-start; padding: 16px 20px; background: var(--gray-100); border-radius: 14px; border: 1px solid rgba(106,108,251,0.08); }
+  .priority-item { display: flex; gap: 20px; align-items: flex-start; padding: 16px 20px; background: rgba(18,0,46,0.5); border-radius: 14px; border: 1px solid rgba(120,33,247,0.08); }
   .priority-num { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
   .priority-num.critical { background: rgba(255,109,109,0.15); color: var(--red-6); }
   .priority-num.high { background: rgba(255,192,68,0.15); color: var(--yellow-5); }
-  .priority-num.strategic { background: rgba(106,108,251,0.15); color: var(--purple-5); }
+  .priority-num.strategic { background: rgba(120,33,247,0.15); color: #7821F7; }
   .priority-text h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
   .priority-text p { font-size: 13px; color: var(--gray-40); line-height: 1.6; }
 
-  .divider { width: 48px; height: 2px; background: linear-gradient(90deg, var(--sky-purple), var(--purple-5)); margin: 12px 0; }
+  .divider { width: 48px; height: 2px; background: linear-gradient(90deg, #7821F7, #B68EFF); margin: 12px 0; }
   .pill { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; }
   .pill.critical { background: rgba(255,109,109,0.15); color: var(--red-6); }
   .pill.high { background: rgba(255,192,68,0.15); color: var(--yellow-5); }
-  .pill.strategic { background: rgba(106,108,251,0.15); color: var(--purple-5); }
+  .pill.strategic { background: rgba(120,33,247,0.15); color: #7821F7; }
 
   /* --- SPARKLINE --- */
-  .sparkline-wrap { background: var(--gray-100); border: 1px solid rgba(106,108,251,0.1); border-radius: 16px; padding: 20px 24px 16px; margin-top: 24px; }
+  .sparkline-wrap { background: rgba(18,0,46,0.5); border: 1px solid rgba(120,33,247,0.1); border-radius: 16px; padding: 20px 24px 16px; margin-top: 24px; }
   .sparkline-head { display: flex; justify-content: space-between; margin-bottom: 8px; }
   .sparkline-title { font-size: 11px; font-weight: 600; color: var(--gray-40); letter-spacing: 0.08em; text-transform: uppercase; }
   .sparkline-range { font-size: 11px; color: var(--gray-50); }
 
   /* --- BROWSER MOCK --- */
   .browser-mock { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
-  .browser-chrome { background: rgba(28,28,34,0.8); padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+  .browser-chrome { background: rgba(18,0,46,0.8); padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
   .browser-dots { display: flex; gap: 6px; }
   .browser-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.1); }
   .browser-url { flex: 1; background: rgba(255,255,255,0.05); border-radius: 6px; padding: 4px 12px; font-size: 11px; color: var(--gray-50); font-family: 'SF Mono', monospace; }
-  .browser-body { background: var(--gray-100); }
+  .browser-body { background: rgba(18,0,46,0.5); }
   .browser-body img { width: 100%; display: block; }
 
   /* --- ANNOTATION --- */
@@ -1187,7 +1195,9 @@ The following is the complete HTML preset template. When building a presentation
   }
   .component {
     background: rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 28px;
     position: relative;
     padding: 24px;
   }
@@ -1221,6 +1231,7 @@ The following is the complete HTML preset template. When building a presentation
   @keyframes stroke-rotate {
     to { --angle: 360deg; }
   }
+  .component { margin-top: 48px; }
   .component + .component { margin-top: 12px; }
 
   .bg-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(120px); opacity: 0.4; }
@@ -1250,6 +1261,8 @@ The following is the complete HTML preset template. When building a presentation
 </head>
 <body>
 
+<canvas id="waveCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none"></canvas>
+
 <div class="nav-progress" id="progress" style="width:0%"></div>
 <nav class="nav">
   <div class="nav-logo">{{TITLE}}</div>
@@ -1260,13 +1273,56 @@ The following is the complete HTML preset template. When building a presentation
       <button id="prevBtn" onclick="goSlide(currentSlide-1)" disabled>&larr;</button>
       <button id="nextBtn" onclick="goSlide(currentSlide+1)">&rarr;</button>
     </div>
+    <button id="fsBtn" onclick="if(!document.fullscreenElement){document.documentElement.requestFullscreen().catch(()=>{})}else{document.exitFullscreen()}" style="width:32px;height:32px;border-radius:8px;border:1px solid rgba(120,33,247,0.15);background:rgba(18,0,46,0.6);color:var(--gray-40);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:12px" title="Fullscreen (F)">&#x26F6;</button>
   </div>
 </nav>
-<div class="slide-hint" id="slideHint">Use arrow keys or click arrows to navigate</div>
+<div class="slide-hint" id="slideHint">Arrow keys to navigate · F for fullscreen</div>
 
 {{SLIDES}}
 
 <script>
+/* --- WAVE CANVAS ANIMATION --- */
+const waveCanvas = document.getElementById('waveCanvas');
+const wCtx = waveCanvas.getContext('2d');
+let waveTime = 0;
+
+function resizeWaveCanvas() {
+  waveCanvas.width = window.innerWidth;
+  waveCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeWaveCanvas);
+resizeWaveCanvas();
+
+function drawWaves() {
+  wCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+  const w = waveCanvas.width;
+  const h = waveCanvas.height;
+
+  for (let i = 0; i < 10; i++) {
+    wCtx.beginPath();
+    wCtx.strokeStyle = `rgba(120, 33, 247, ${0.06 + i * 0.012})`;
+    wCtx.lineWidth = 1.5;
+
+    const baseY = h * 0.3 + i * (h * 0.05);
+    const amplitude = h * 0.15 + i * 8;
+    const frequency = 0.003 + i * 0.0002;
+    const phase = waveTime * 0.4 + i * 0.8;
+
+    for (let x = 0; x <= w; x += 3) {
+      const y = baseY + Math.sin(x * frequency + phase) * amplitude
+                + Math.sin(x * frequency * 0.5 + phase * 1.3) * (amplitude * 0.3);
+      if (x === 0) wCtx.moveTo(x, y);
+      else wCtx.lineTo(x, y);
+    }
+    wCtx.stroke();
+  }
+
+  waveTime += 0.015;
+  requestAnimationFrame(drawWaves);
+}
+drawWaves();
+
+/* --- SLIDE ENGINE --- */
 const slides = document.querySelectorAll('section[data-section]');
 const totalSlides = slides.length;
 let currentSlide = 0;
@@ -1322,6 +1378,12 @@ document.addEventListener('keydown', (e) => {
   } else if (e.key === 'End') {
     e.preventDefault();
     goSlide(totalSlides - 1);
+  } else if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
   }
 });
 
