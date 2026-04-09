@@ -49,7 +49,7 @@ For Claude.ai, you don't install the full skill. Instead:
 
 The claude-ai version bundles all the skill instructions, component patterns, and the preset into a single markdown file that works as Project Knowledge.
 
-> **Note:** The claude-ai version does not include the Impact3 logo SVG or the full preset CSS inline — those are embedded in the Claude Code version's reference files. If you need the logo, copy it from `references/impact3-logo.svg.html`.
+> **Note:** The claude-ai version is fully self-contained — the Impact3 logo SVG and the full preset CSS are both embedded inline. No external files are needed.
 
 ## Presets
 
