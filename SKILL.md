@@ -4,7 +4,7 @@ description: |
   Generate self-contained HTML slide presentations from briefs, data, and screenshots.
   Produces single-file decks with base64-inlined images that work anywhere — browser, Netlify, email.
   Use when asked to create a presentation, slide deck, pitch deck, or data story.
-version: 1.2.0
+version: 1.2.1
 repository: https://github.com/universethec/presentation-i3
 allowed-tools:
   - Read
@@ -266,20 +266,20 @@ If content doesn't fit, the solution is ALWAYS to split into more slides. Never 
 
 ## Version & Updates
 
-**Current version:** 1.2.0
+**Current version:** 1.2.1
 **Repository:** https://github.com/universethec/presentation-i3
 
 ### Checking for updates
 
 When the user asks "what version is presentation-i3?", "is presentation-i3 up to date?", or "update presentation-i3":
 
-1. Report the current local version: **1.2.0**
+1. Report the current local version: **1.2.1**
 2. Check the latest version on GitHub:
    ```bash
    git -C ~/.claude/skills/presentation-i3 fetch origin --tags 2>/dev/null && git -C ~/.claude/skills/presentation-i3 describe --tags --abbrev=0 origin/main 2>/dev/null
    ```
 3. Compare local vs remote:
-   - If same: "Presentation Builder is up to date (v1.2.0)."
+   - If same: "Presentation Builder is up to date (v1.2.1)."
    - If remote is newer: "Update available: v{local} → v{remote}. Run update?"
    - If no .git directory: "No git repo linked yet. To enable updates, clone from the repository URL."
 

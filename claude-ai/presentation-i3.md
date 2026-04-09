@@ -1,12 +1,17 @@
+---
+name: presentation-i3
+description: Generate self-contained HTML slide presentations from briefs, data, and screenshots. Produces single-file decks with base64-inlined images that work anywhere — browser, Netlify, email. Use when asked to create a presentation, slide deck, pitch deck, or data story.
+---
+
 # Presentation i3 — Self-Contained Skill for Claude.ai
 
-> Upload this file as Project Knowledge in a Claude.ai Project. Then ask Claude to build you a presentation.
+> Upload this file directly in Claude.ai's **Skills** UI, or as **Project Knowledge** in a Claude.ai Project. Then ask Claude to build you a presentation.
 
 ## How this works
 
 This is a presentation builder skill. Give Claude a brief, data, and optionally screenshots, and it will generate a self-contained HTML slide presentation you can open in any browser.
 
-**Environment:** This file is designed for Claude.ai (Project Knowledge). For Claude Code, install the full skill: `git clone <repo> ~/.claude/skills/presentation-i3`
+**Environment:** This file is designed for Claude.ai (Skills upload or Project Knowledge). For Claude Code, install the full skill: `git clone https://github.com/universethec/presentation-i3 ~/.claude/skills/presentation-i3`
 
 ## Workflow — 5 Phases
 
