@@ -4,7 +4,7 @@ description: |
   Generate self-contained HTML slide presentations from briefs, data, and screenshots.
   Produces single-file decks with base64-inlined images that work anywhere — browser, Netlify, email.
   Use when asked to create a presentation, slide deck, pitch deck, or data story.
-version: 1.2.2
+version: 1.3.0
 repository: https://github.com/universethec/presentation-i3
 allowed-tools:
   - Read
@@ -33,7 +33,12 @@ Follow these phases in order. Do not skip phases. Do not start building before t
 
 1. Ask the user: **"What's the audience?"** (stakeholders, team, investors, etc.)
 2. Ask: **"What's the single takeaway?"** (one sentence they should remember)
-3. List all `.html` files in this skill's `presets/` folder. If only one preset exists, auto-select it. If multiple, ask the user to pick.
+3. **Preset selection.** List all `.html` files in this skill's `presets/` folder.
+   - For each preset, read its first ~10 lines and extract two HTML comment markers:
+     - `<!-- preset-name: NAME -->` (display name for the picker)
+     - `<!-- preset-description: ONE-LINE DESCRIPTION -->` (shown as the picker's option description)
+   - If only one preset exists, auto-select it.
+   - If two or more exist, use the **AskUserQuestion** tool with a single question titled "Pick a preset", one option per preset. Each option's `label` is the `preset-name`; each option's `description` is the `preset-description`. Save the user's choice (the preset filename) as `selectedPreset` for use across all later phases.
 4. Ask for **data sources** — paths to markdown files, documents, or descriptions of data to include.
 5. Ask for **screenshots** — path to a folder containing images (e.g., `/resources`), or note that no screenshots are needed.
 6. Read all provided data source files. Inventory all screenshots (list filenames and note what each appears to show).
@@ -47,7 +52,11 @@ Follow these phases in order. Do not skip phases. Do not start building before t
 **Goal:** Propose a slide outline and get user approval before building anything.
 
 1. Read `references/narrative-arcs.md` — select the best arc for the brief.
-2. Read `references/components.md` — understand available component types and their auto-select triggers.
+2. Read the components reference for the selected preset:
+   - `krystee.html` → `references/krystee-components.md`
+   - any other preset → `references/components.md`
+
+   Understand available component types and their auto-select triggers. The two component vocabularies do not overlap — only use components from the file that matches `selectedPreset`.
 3. Read `references/screenshot-patterns.md` — understand how to compose images with data.
 4. Generate a **slide-by-slide outline**. For each slide, specify:
 
@@ -65,8 +74,8 @@ Slide N: "Title"
 8. Save the approved storyboard as `storyboard.md` next to the output HTML.
 
 **Rules:**
-- First slide should always be a `hero` component.
-- Last slide should be actionable (recommendations, priorities, next steps).
+- First slide should always be the preset's title/cover component (iMPACT3: `hero`; Krystee: `cover`).
+- Last slide should be actionable (recommendations, priorities, next steps) — Krystee decks use the `close` component for this.
 - Each slide should make exactly ONE point. One headline. One visual or one data story. Not both crammed together.
 - Every slide with a screenshot: headline + insight on one side, ONE screenshot on the other. Never two screenshots on one slide.
 - Before/after comparisons: split into TWO slides. First slide = "before" state. Second slide = "after" reveal.
@@ -81,9 +90,9 @@ Slide N: "Title"
 **Goal:** Generate the complete HTML presentation.
 
 1. Read the chosen preset file from `presets/`.
-2. Read `references/components.md` for HTML patterns.
+2. Read the components reference matching `selectedPreset` (`krystee-components.md` for `krystee.html`, otherwise `components.md`) for HTML patterns.
 3. For each slide in the approved storyboard:
-   a. Look up the component HTML pattern in `components.md`.
+   a. Look up the component HTML pattern in the components file you loaded in step 2.
    b. Replace all `{{TOKEN}}` placeholders with actual data from the storyboard.
    c. If the slide references a screenshot:
       - Read the image file using the Read tool
@@ -91,7 +100,9 @@ Slide N: "Title"
       - Replace `{{IMAGE_SRC}}` with `data:image/png;base64,<encoded_data>`
       - For JPGs use `data:image/jpeg;base64,...`
    d. If the slide uses a screenshot-pattern (before-after, annotated, etc.), read `references/screenshot-patterns.md` and apply the composition.
-   e. Wrap each slide in a comment marker and section tag:
+   e. Wrap each slide in a comment marker and section tag, **per preset**:
+
+      **iMPACT3 (`impact3.html`):**
       ```html
       <!-- SLIDE N: Title -->
       <section data-section="N" class="CLASS">
@@ -100,8 +111,19 @@ Slide N: "Title"
         </div>
       </section>
       ```
-   f. Use `class="hero"` for slide 0. Default: no extra class. Avoid `class="dense"` unless absolutely necessary. Every slide should breathe like a website hero section. See the Design Philosophy section.
-   g. Add `reveal` and `reveal-delay-N` classes to content elements for staggered animations. Pattern: kicker gets `reveal`, h2 gets `reveal reveal-delay-1`, first content block gets `reveal reveal-delay-2`, etc.
+
+      **Krystee (`krystee.html`):**
+      ```html
+      <!-- SLIDE N: Title -->
+      <section data-label="N Title" class="OPTIONAL_THEME_CLASSES">
+        ...slide content (no .section-inner wrapper) ...
+      </section>
+      ```
+      The Krystee scaler reads `data-label` for navigation. Theme classes: `orange`, `cream`, `white`, `dept-graphics`, `dept-web`, `dept-video`, `section-divider`, or any combination.
+
+   f. **iMPACT3 only:** Use `class="hero"` for slide 0. Default: no extra class. Avoid `class="dense"` unless absolutely necessary. Every slide should breathe like a website hero section. See the Design Philosophy section.
+      **Krystee only:** Apply theme classes per the components doc — `cover` slide takes no class, chapter dividers take `orange section-divider [dept-X]`, the manifesto component takes `orange`, and most content slides are unclassed (default dark).
+   g. **iMPACT3 only:** Add `reveal` and `reveal-delay-N` classes to content elements for staggered animations. Pattern: kicker gets `reveal`, h2 gets `reveal reveal-delay-1`, first content block gets `reveal reveal-delay-2`, etc. Krystee has its own scaler-driven slide transitions and does not use `reveal` classes.
 
 4. Replace tokens in the preset:
    - `{{SLIDES}}` → all generated `<section>` blocks
@@ -153,7 +175,7 @@ Slide N: "Title"
 3. For each change request:
    a. Locate the slide using `<!-- SLIDE N: Title -->` comment markers.
    b. Make the edit using the Edit tool — surgical changes, not full rebuilds.
-   c. If the request involves swapping a component type, read `components.md` for the new pattern.
+   c. If the request involves swapping a component type, read the components reference for `selectedPreset` (`krystee-components.md` or `components.md`) for the new pattern.
    d. If new screenshots are added, base64-encode them.
    e. Any new or changed text goes through humanizer rules again.
 4. After each round of edits, tell the user to refresh their browser.
@@ -167,7 +189,8 @@ This skill reads these files as needed during each phase:
 
 | File | Used in | Purpose |
 |------|---------|---------|
-| `references/components.md` | Phase 2, 3, 5 | HTML patterns for all component types |
+| `references/components.md` | Phase 2, 3, 5 | HTML patterns for the **iMPACT3** preset |
+| `references/krystee-components.md` | Phase 2, 3, 5 | HTML patterns for the **Krystee** preset |
 | `references/screenshot-patterns.md` | Phase 2, 3, 5 | Image composition recipes |
 | `references/narrative-arcs.md` | Phase 2 | Story structure templates |
 | `references/humanizer-rules.md` | Phase 4, 5 | AI writing patterns to strip |

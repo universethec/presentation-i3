@@ -55,7 +55,10 @@ The claude-ai version bundles all the skill instructions, component patterns, an
 
 | Preset | Description |
 |--------|-------------|
-| `impact3` | Dark purple gradient, Impact3 branding, animated wave canvas, conic-gradient stroke borders (default) |
+| `impact3` | iMPACT3 company brand deck — dark purple gradient, animated wave canvas, conic-gradient stroke borders, navigation chrome with slide counter (default) |
+| `krystee` | Krystee's retreat presentation deck — fixed 1920×1080 canvas with auto-scale, Inter Tight display type, dark base with purple/gold/green departmental accents, big hero typography, asymmetric grids, pill/bento/pillar layouts |
+
+When 2+ presets are installed, the skill asks which one to use at the start of a session. Each preset declares its own description via an HTML comment at the top of the file (`<!-- preset-description: ... -->`).
 
 ### impact3 preset rules
 
@@ -66,22 +69,33 @@ The claude-ai version bundles all the skill instructions, component patterns, an
 - Impact3 logo SVG mandatory on hero slide
 - Uploaded images (PNG/JPG) never wrapped in component containers
 
+### krystee preset rules
+
+- Fixed 1920×1080 `<deck-stage>` canvas, auto-scaled to viewport — never override
+- Inter Tight as base64-inlined variable font (latin + latin-ext, weights 100–900)
+- Sections are direct children of `<deck-stage>` — do NOT use the `.component`/`.section-inner` wrappers
+- Theme classes: `orange`, `cream`, `white`, `dept-graphics`, `dept-web`, `dept-video`, `section-divider`
+- One idea per slide — type goes from 56px to 200px depending on component
+- Manifesto component (the strikethrough/highlight slide) is reserved for 1–2 high-impact slides per deck
+
 ## File structure
 
 ```
 presentation-i3/
-  SKILL.md              # Main skill instructions (Claude Code)
-  README.md             # This file
+  SKILL.md                        # Main skill instructions (Claude Code)
+  README.md                       # This file
   claude-ai/
-    presentation-i3.md  # Single-file version for Claude.ai Projects
+    presentation-i3.md            # Single-file version for Claude.ai Projects (both presets bundled)
   presets/
-    impact3.html        # Full HTML shell template (default and only preset)
+    impact3.html                  # iMPACT3 company brand deck (fluid CSS)
+    krystee.html                  # Krystee retreat deck (fixed 1920×1080 + scaler)
   references/
-    components.md       # HTML patterns for all slide components
+    components.md                 # HTML patterns for the iMPACT3 preset
+    krystee-components.md         # HTML patterns for the Krystee preset
     screenshot-patterns.md
-    narrative-arcs.md   # Story structure templates
-    humanizer-rules.md  # AI writing patterns to strip
-    impact3-logo.svg.html  # Impact3 wordmark SVG
+    narrative-arcs.md             # Story structure templates
+    humanizer-rules.md            # AI writing patterns to strip
+    impact3-logo.svg.html         # iMPACT3 wordmark SVG (used by both presets)
 ```
 
 ## Components
